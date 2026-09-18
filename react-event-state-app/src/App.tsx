@@ -1,120 +1,123 @@
+// import { useState } from 'react'
+
+// import './App.css'
+
+// function App() {
+//   const [count, setCount] = useState(0)
+
+//   return (
+//     <>
+//     function handleClick (){
+//       alert('button clicked')
+//     }  
+
+//       <button onclick = "handleClick ()">Click Me</button> //Here is line is Javascript 
+
+
+      // {/* <button onClick ={handleClick}>Click Me 2</button> */}
+
+//       <button>Click Me 3</button>
+
+      
+//     </>
+
+//   )
+// }
+
+// export default App
+
+
+
+import { Suspense } from 'react'
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
+import Cart from './Cart'
+import Counter from './Counter'
+import Batter from './Batter'
+import Users from './Users'
+import Todos from './Todos'
+
+
+const usersDataPromise = async() =>{
+  const res = await fetch ('https://jsonplaceholder.typicode.com/users');
+  const data = await res.json();
+  return data;
+}
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+
+  // const handleClick = () => {  // Arrow function used to call 
+  //   alert('click me 3')
+  // }
+
+  // function handlesClick() {
+  //   alert('button clicked 2') // Tradional function use to call 
+  // }
+
+  // const addToCart = (tk) => {  // Using arrow function perameter
+  //   alert('Buy now = '+ tk)
+  //}
+
+
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    {/* // Example for State Matter and Re-rendering works: */}
 
-      <div className="ticks"></div>
+     {/* <Cart></Cart> */}
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+    {/* // useState React elemnet use : 
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+    <Counter></Counter>
+
+    <p>______________________________________________________</p>
+
+    // Another Example of useState :
+
+    <Batter></Batter> */}
+
+    <p>______________________________________________________</p>
+
+    //Here we see the async and await methods 
+
+    {/* *
+    *1. Suspense fallback 
+     * 2. create a promise function to load data
+     * 3.send to promise to the component to load data
+     */}
+
+
+    <Suspense fallback ={<p>Loading...</p>}>
+      <Users usersDataPromise = {usersDataPromise()}></Users>
+    </Suspense>
+
+
+    // Using Todos methods 
+
+    <Todos></Todos>
+
+
+
+
+
+
+   
+
+
+
+
+
+      {/* <button onClick={handleClick}>Click Me</button> // simple button create 
+
+      <button onClick={handlesClick}>Click Me 2</button> // button with traditional function call 
+
+      <button onClick={handleClick}>Click Me 3</button>  // button with arrow function call 
+
+      <button onClick={() => alert('Click 4')}> Click Me 4</button> // Attach a function inside the link property
+
+       <button onClick={() => addToCart(56)}> Click Me 5</button>  // call arrow function using Function Argument */}
     </>
   )
 }
